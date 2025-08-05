@@ -1,13 +1,14 @@
-const express=require('express');
-const app=express();
-const mongoose=require('mongoose');
-const userSchema=require('./Models/user.model.js');
-app.use(express.json());
-const cors=require('cors');
-app.use(cors());
 require('dotenv').config({
     path:"./config/.env"
 });
+const express=require('express');
+const app=express();
+const mongoose=require('mongoose');
+const userRoutes=require("./Routes/user.route.js");
+app.use(express.json());
+app.use("/user",userRoutes);
+const cors=require('cors');
+app.use(cors());
 const MONGO_DB_URL=process.env.MONGO_DB_URL;
 mongoose.connect(MONGO_DB_URL)
 .then(()=>{
